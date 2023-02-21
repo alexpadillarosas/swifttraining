@@ -92,6 +92,41 @@ print(itemGathered)
 var itemDropped : String? = "Axe"
 print(itemDropped)
 
+//First version that will break your code
+var myName2 : String = "" //it's hard to fool the compiler here but in an app with a UI myName2 can be nil
+
+print(myName2.count)
+
+
+//Optionals to the rescue
+var myName :  String? = "Dr Pepper"
+//print(myName?.count)
+
+if let unwrapped = myName {
+    print("\(unwrapped.count) letters")
+    //here you are sure myName has a value
+    print(unwrapped)
+    
+}else{
+    //myName does not have a value
+    print("Missing name")
+}
+
+/*
+ implicit unwrapped optional : ! (exclamation mark)  it might contain a value or might not, but it won't need to be unwrapped before use
+ but you need to be extra carefull, Swift won't check for you.
+ Implicitly unwrapped optional exist because sometimes a variable will start life as nil, but will always have a value
+ before you need to use it. Because you know they will have a value by the time you need them, it's helpful not having to write if let all the time.
+ To sum up: an implicitly unwrapped optional promises the compiler it has a value when it is accessed.
+ */
+
+
+var text: String! = nil
+
+let totalLetters = text?.count //test what happens if we remove the optional -> the app crashes
+
+print(totalLetters)
+
 //Swift Arrays
 //creating arrays
 var test : [String] = [] //empty initialised array
@@ -307,7 +342,7 @@ print("result3 : \(result3)")
 
 //Functions with multiple return values
 func createUser(firstName : String, lastName: String) -> (fullName : String, active: Bool){
-    var temp = firstName + " " + lastName
+    let temp = firstName + " " + lastName
     return ( temp, false)
 }
 var details = createUser(firstName: "Shiori", lastName: "Takei")
@@ -334,7 +369,7 @@ var jumpStrike : AttackTuple = ("Jump Strike", 60, false)
 
 //using the new datatype as parameter / return value
 func levelUpAttack( baseAttack : AttackTuple) -> AttackTuple {
-    var increasedAttack : AttackTuple = ( baseAttack.name, baseAttack.damage + 10, true)
+    let increasedAttack : AttackTuple = ( baseAttack.name, baseAttack.damage + 10, true)
     return increasedAttack
 }
 
