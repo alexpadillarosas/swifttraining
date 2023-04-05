@@ -8,7 +8,7 @@
 import Foundation
 
 //********************************************************************************************************************
-//DataTypes
+//  DataTypes
 //********************************************************************************************************************
 /**
     Swift manage datatypes such:
@@ -17,7 +17,7 @@ import Foundation
 */
 
 //********************************************************************************************************************
-// Declaring Variables and initializing them
+//  Declaring Variables and initializing them
 //********************************************************************************************************************
 print("**************************** Declaring Variables ******************************")
 var letter : Character = "S"
@@ -29,14 +29,14 @@ var isItRaining : Bool = false
 var inventoryItems, equipmentSlots, currentGold : Int
 
 //********************************************************************************************************************
-//Constants
+//  Constants
 //********************************************************************************************************************
 print("**************************** Constants ******************************")
 let maxTemperature = 200
 print(maxTemperature)
 
 //********************************************************************************************************************
-//Type Inference
+//  Type Inference
 //********************************************************************************************************************
 print("**************************** Type Inference ******************************")
 var characterName = "Kung Fu"
@@ -57,7 +57,7 @@ print(currentHealth)
 // Logical operators  ! ,  &&   ,  ||
 
 //********************************************************************************************************************
-//String interpolation
+//  String interpolation
 //********************************************************************************************************************
 print("**************************** String Interpolation ******************************")
 var activeQuest : String = "Retrieving the cart"
@@ -67,7 +67,7 @@ var interpolatedInfo = "I'm not sure you are ready for \(activeQuest)  yet, it's
 print(interpolatedInfo)
 
 //********************************************************************************************************************
-//String Methods
+//  String Methods
 //********************************************************************************************************************
 print("**************************** String Methods ******************************")
 var phrase = "The song is boring"
@@ -94,7 +94,7 @@ print(phrase.contains("s"))
 print(phrase.split(separator: ","))
 
 //********************************************************************************************************************
-//Type Conversions
+//  Type Conversions
 //********************************************************************************************************************
 print("**************************** Type Conversions ******************************")
 var currentGoldDouble = 5.654
@@ -106,7 +106,7 @@ var currentGoldString = String(currentGoldDouble)
 print(currentGoldString)
 
 //********************************************************************************************************************
-//Optionals
+//  Optionals
 //********************************************************************************************************************
 print("**************************** Optionals ******************************")
 // If we declare a variable and try to print it (the next 2 instructions), Swift will stop us and tell us : Varible 'itemGathered'
@@ -133,7 +133,7 @@ print(myName2.count)
 var myName :  String? = "Dr Pepper"
 //print(myName?.count)
 
-//Unwrapping an optional with an if  conditional (Very useful and used a lot)
+//Unwrapping an optional with an if conditional (Very useful and used a lot)
 if let unwrapped = myName {
     print("\(unwrapped.count) letters")
     //here you are sure myName has a value
@@ -146,7 +146,7 @@ if let unwrapped = myName {
 //So if you want to be sure that a variable does contain a value you better use optional  : ? (question mark)s
 
 //********************************************************************************************************************
-// implicit unwrapped optional : ! (exclamation mark)
+//  implicit unwrapped optional : ! (exclamation mark)
 //********************************************************************************************************************
 /*
  it might contain a value or might not, but it won't need to be unwrapped before use
@@ -164,11 +164,13 @@ let totalLetters = text?.count //test what happens if we remove the optional -> 
 print(totalLetters)
 
 //Watch out when telling the compiler a variable will have a value, but it won't, so the app will crash. run the following instructions to test it.
-var someValue: Int!
-var unwrappedValue : Int = someValue
+//Uncomment these 2 lines to see how your program crashes
+
+//var someValue: Int!
+//var unwrappedValue : Int = someValue
 
 //********************************************************************************************************************
-// Arrays
+//  Arrays
 //********************************************************************************************************************
 print("**************************** Arrays ******************************")
 //creating arrays
@@ -190,7 +192,7 @@ print(levelDifficulty.sorted())
 
 
 //********************************************************************************************************************
-//Dictionaries
+//  Dictionaries
 //********************************************************************************************************************
 print("**************************** Dictionaries ******************************")
 var stones : [String : Double] = [ "Opal":1000.0 ,
@@ -205,7 +207,7 @@ stones["Opal"] = 2000.0
 print(stones["Opal"])
 
 //********************************************************************************************************************
-// Conditionals
+//  Conditionals
 //********************************************************************************************************************
 print("**************************** Conditionals ******************************")
 var score = 34
@@ -229,7 +231,7 @@ if score > 100 && score < 122 {
 }
 
 //********************************************************************************************************************
-// Loops
+//  Loops
 //********************************************************************************************************************
 print("**************************** Loops ******************************")
 
@@ -261,7 +263,7 @@ while playerHealth > 0 {
 
 
 //********************************************************************************************************************
-// Functions
+//  Functions
 //********************************************************************************************************************
 
 print("**************************** Functions ******************************")
@@ -296,7 +298,7 @@ var details = createUser(firstName: "Shiori", lastName: "Takei")
 print(details)
 
 //********************************************************************************************************************
-// Closures
+//  Closures
 //********************************************************************************************************************
 print("**************************** Closures ******************************")
 // In Swift, a closure is a special type of function without the function name, for example
