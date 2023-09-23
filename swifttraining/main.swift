@@ -91,7 +91,7 @@ print(phrase.contains("s"))
 //phrase.removeFirst()
 //print(phrase)
 
-print(phrase.split(separator: ","))
+print(phrase.split(separator: " "))
 
 //********************************************************************************************************************
 //  Type Conversions
@@ -135,8 +135,9 @@ var myName :  String? = "Dr Pepper"
 
 //Unwrapping an optional with an if conditional (Very useful and used a lot)
 if let unwrapped = myName {
-    print("\(unwrapped.count) letters")
     //here you are sure myName has a value
+    print("\(unwrapped.count) letters")
+    
     print(unwrapped)
     
 }else{
