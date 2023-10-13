@@ -170,6 +170,22 @@ print(totalLetters)
 //var someValue: Int!
 //var unwrappedValue : Int = someValue
 
+
+//********************************************************************************************************************
+//  Nil-Coalescing Ooperator ??
+//********************************************************************************************************************
+print("**************************** ?? Operator ******************************")
+
+let defaultColorName = "red"
+var userDefinedColorName: String?   // defaults to nil
+
+
+var colorNameToUse = userDefinedColorName ?? defaultColorName
+// userDefinedColorName is nil, so colorNameToUse is set to the default of "red"
+
+
+
+
 //********************************************************************************************************************
 //  Arrays
 //********************************************************************************************************************
@@ -206,6 +222,12 @@ print(opalPrice)
 //modifying a value in a dictionary
 stones["Opal"] = 2000.0
 print(stones["Opal"])
+
+//declare an empty dictionary
+var emojiDictionary = [Int  : String]()
+
+//alternative declaration
+var emoji: Dictionary<Int, String>
 
 //********************************************************************************************************************
 //  Conditionals
@@ -297,6 +319,33 @@ func createUser(firstName : String, lastName: String) -> (fullName : String, act
 }
 var details = createUser(firstName: "Shiori", lastName: "Takei")
 print(details)
+
+print("**************************** External & Internal Parameter names in Swift ******************************")
+/*
+Swift  functions can use external parameter names to give parameters more  meaningful names when the function is called. The external parameter  name is used when calling the function, while the internal parameter  name is used within the function body.
+To  use external parameter names, you can write the external parameter name  before the internal parameter name in the function definition,  separated by a space.
+For example, the following function calculates the area of a rectangle:
+*/
+func calculateArea(of width: Int, and height: Int) -> Int {
+  return width * height
+}
+/*
+ Here, of and and are the external parameter names, and width and height are the internal parameter names. To call this function, you would use the external parameter names:
+ */
+let area = calculateArea(of: 5, and: 10) // 50
+/*
+ Alternatively, you can use _ as the external parameter name to indicate that the parameter should not be used when calling the function:
+ */
+func calculateArea(_ width: Int, _ height: Int) -> Int {
+    return width * height
+}
+//In this example, you can call the function like this:
+
+let area2 = calculateArea(5, 10) // 50
+
+/*
+Using  external parameter names can make your code more readable and  organized, allowing you to more clearly express the intent of the  function.
+ */
 
 //********************************************************************************************************************
 //  Closures
