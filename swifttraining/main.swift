@@ -262,7 +262,7 @@ let playerGreeting = "Hello fellow hunter"
 let armorTypes = ["Heavy Plate", "Hunters Gear", "Mage Robes"]  //Array
 let weapons = ["Longsword": 150, "Dagger":25 , "Mace":75]       //Dictionary
 
-//Looping string
+//Looping through all characters inside of a ?string
 for myCharacter in playerGreeting {
     print(myCharacter)
 }
@@ -346,6 +346,25 @@ let area2 = calculateArea(5, 10) // 50
 /*
 Using  external parameter names can make your code more readable and  organized, allowing you to more clearly express the intent of the  function.
  */
+
+//********************************************************************************************************************
+//  Enumerators, used to create datatypes with a small range of elements
+//********************************************************************************************************************
+print("**************************** Enumerators ******************************")
+enum SithRank {
+    case Master
+    case Apprentice
+}
+// Enumerators with values
+enum Turn : String{
+    case NOUGHT = "O"
+    case CROSS = "X"
+}
+
+var firstTurn = Turn.CROSS
+print(firstTurn)
+print(firstTurn.rawValue)
+
 
 //********************************************************************************************************************
 //  Closures
