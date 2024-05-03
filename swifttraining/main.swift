@@ -133,7 +133,8 @@ print(myName2.count)
 var myName :  String? = "Dr Pepper"
 //print(myName?.count)
 
-//Unwrapping an optional with an if conditional (Very useful and used a lot)
+//======================================
+//Unwrapping an optional with an if let  (Very useful and used a lot)
 if let unwrapped = myName {
     //here you are sure myName has a value
     print("\(unwrapped.count) letters")
@@ -144,7 +145,31 @@ if let unwrapped = myName {
     //myName does not have a value
     print("Missing name")
 }
-//So if you want to be sure that a variable does contain a value you better use optional  : ? (question mark)s
+//So if you want to be sure that a variable does contain a value you better use optional  : ? (question mark)
+
+//======================================
+//Unwrapping an optional with guard:
+// guard let is designed to exit the current function, loop or condition if the check fails, let's use the same example
+func checkValue() -> Void {
+    guard let unwrapped = myName else {
+        return
+    }
+    print(unwrapped)
+}
+//a couple of things happens in here, guard let us focus on the happy path, the behaviour of logic when everything has
+//gone to plan. it requires that we exit the current scope (loop, condition, function) when the guard fails
+//It's a good fit for validations at the beginning of the function, after we pass all guards it means all conditions are correct.
+
+
+//********************************************************************************************************************
+//  Unwrapping Optionals :  if let vs guards let
+//********************************************************************************************************************
+
+//It’s common to see guard used one or more times at the start of methods, because it’s used to verify some conditions are correct up front. This makes our code easier to read than if we tried to check a condition then run some code, then check another condition and run some different code.
+
+//So, use if let if you just want to unwrap some optionals, but prefer guard let if you’re specifically checking that conditions are correct before continuing.
+
+
 
 //********************************************************************************************************************
 //  implicit unwrapped optional : ! (exclamation mark)
