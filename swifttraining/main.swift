@@ -201,6 +201,8 @@ print(totalLetters)
 //********************************************************************************************************************
 print("**************************** ?? Operator ******************************")
 
+//Optionals sometimes litter the code ( they are everywhere ), to avoid nil-coalescing operator helps to solve this problem
+
 let defaultColorName = "red"
 var userDefinedColorName: String?   // defaults to nil
 
@@ -208,7 +210,7 @@ var userDefinedColorName: String?   // defaults to nil
 var colorNameToUse = userDefinedColorName ?? defaultColorName
 // userDefinedColorName is nil, so colorNameToUse is set to the default of "red"
 
-
+// You don't need to create a separate variable to use nil coalescing
 
 
 //********************************************************************************************************************
@@ -566,20 +568,33 @@ var darthSidious = Sith(name: "Sheev Palpatine", rank: "Master", lightning: true
 darthSidious.printValues()
 
 
-// Extensions
+// Extending String
 extension String {
     func myOwnStringFunction(){
         print("I have this capability now")
     }
 }
 
+//Extending String Optionals
+extension Optional where Wrapped == String {
+    
+    var isBlank : Bool {
+
+        return self?.trimmingCharacters(in:.whitespaces).isEmpty ?? true
+    }
+
+}
+
 var name123 : String = "John"
 name.myOwnStringFunction()
 
 
-
-
-
+var testnil : String? = ""    //defaults to nil
+if testnil.isBlank {
+    print("is blank")
+}else{
+    print("it has a value")
+}
 
 
 
