@@ -419,7 +419,20 @@ var greet = {
 //  notice that the print statement inside the closure is executed
 greet()
 
-//  Closure with parameters
+//  Closure without parameters
+
+let simpleClosure: () -> Void = {
+    print("Hello World")
+}
+//calling the closure:
+simpleClosure()
+
+// Closure with 1 parameter
+let greetUserClosure: (String) -> Void = {  (name)  in
+    print("Hello \(name)")
+}
+//calling the closure:
+greetUserClosure("Michael")
 
 let greetUser = {  (name:  String) in
     print("Hello \(name)")
@@ -429,13 +442,20 @@ greetUser("Curly lemon peel")
 //  notice: Unlike functions, we call the closure without mentioning the parameter name.
 
 //  Closure with parameters returning a value
-
-let calculateSquareArea = { (side : Int) -> Int in
+let calculateSquareAreaClosure: (Int) -> Int = { (side) in
     return  side*side
 }
 //  calling the closure
-let result = calculateSquareArea(5)
+let result = calculateSquareAreaClosure(5)
 print("square area \(result)")
+
+// Closure with multiple parameters returning a value
+let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width ) in
+    return length * width
+}
+//calling the closure
+let recArea = calculateRectangleAreaClosure(3,2)
+print("rectangle area: \(recArea)")
 
 //  Closures as Function Parameter
 
@@ -579,8 +599,15 @@ extension String {
 extension Optional where Wrapped == String {
     
     var isBlank : Bool {
-
-        return self?.trimmingCharacters(in:.whitespaces).isEmpty ?? true
+        //if we manage to unwrap it then it means is not nil, else is nil
+        guard let notNilBool = self else {
+            // as it is nil, we consider nil as blank string
+            return true
+        }
+        //at this point nilBool is not null
+        return notNilBool.trimmingCharacters(in:.whitespaces).isEmpty
+        
+    
     }
 
 }
@@ -589,15 +616,12 @@ var name123 : String = "John"
 name.myOwnStringFunction()
 
 
-var testnil : String? = ""    //defaults to nil
+var testnil : String?   //defaults to nil
 if testnil.isBlank {
     print("is blank")
 }else{
     print("it has a value")
 }
-
-
-
 
 
 
