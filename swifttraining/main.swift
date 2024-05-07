@@ -479,12 +479,14 @@ grabLunch(search: {
 
 // Trailing Closure
 
-// In trailing closure, if a function accepts a closure as its last parameter,
-// we can call the function by passing closure as a function body without mentioning the name of the parameter.
-// For instance the previous function has a trailing closure, therefore we could call it like this:
+/* In trailing closure:
+    If a function accepts a closure as its last parameter
+    When a function takes a trailing closure, you can omit the parenthesis when calling the function. (we can call the function by passing closure as a function body without mentioning the name of the parameter.)
+ For instance the previous function has a trailing closure, therefore we could call it like this:
+*/
 
 grabLunch {
-    print("Phillip is really hungry after working with trailing closure")
+    print("Phillip is really hungry after working with trailing closures")
 }
 
 // Now let's see trailing closures with more than 1 parameters, let's define this function:
