@@ -419,7 +419,15 @@ var greet = {
 //  notice that the print statement inside the closure is executed
 greet()
 
+
+//********************************************************************************************************************
+// Empty closure
+//********************************************************************************************************************
+var myClosure : () -> () = {}
+
+//********************************************************************************************************************
 //  Closure without parameters
+//********************************************************************************************************************
 
 let simpleClosure: () -> Void = {
     print("Hello World")
@@ -427,21 +435,26 @@ let simpleClosure: () -> Void = {
 //calling the closure:
 simpleClosure()
 
-// Closure with 1 parameter
-let greetUserClosure: (String) -> Void = {  (name)  in
-    print("Hello \(name)")
+//********************************************************************************************************************
+//  Closure with 1 parameter
+//  the parameter called "myName" is specified, and we will refer to this String parameter using this name in the closure
+//********************************************************************************************************************
+let greetUserClosure: (String) -> Void = {  (myName)  in
+    print("Hello \(myName)")
 }
 //calling the closure:
 greetUserClosure("Michael")
 
-let greetUser = {  (name:  String) in
-    print("Hello \(name)")
+let greetUser = {  (anotherName:  String) in
+    print("Hello \(anotherName)")
 }
 //  calling the closure
 greetUser("Curly lemon peel")
 //  notice: Unlike functions, we call the closure without mentioning the parameter name.
 
-//  Closure with parameters returning a value
+//********************************************************************************************************************
+//  Closure with parameter returning a value
+//********************************************************************************************************************
 let calculateSquareAreaClosure: (Int) -> Int = { (side) in
     return  side*side
 }
@@ -449,7 +462,9 @@ let calculateSquareAreaClosure: (Int) -> Int = { (side) in
 let result = calculateSquareAreaClosure(5)
 print("square area \(result)")
 
-// Closure with multiple parameters returning a value
+//********************************************************************************************************************
+//  Closure with multiple parameters returning a value
+//********************************************************************************************************************
 let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width ) in
     return length * width
 }
@@ -457,8 +472,9 @@ let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width
 let recArea = calculateRectangleAreaClosure(3,2)
 print("rectangle area: \(recArea)")
 
+//********************************************************************************************************************
 //  Closures as Function Parameter
-
+//********************************************************************************************************************
 //  In Swift we can create a function that accepts a closure as its parameter
 
 func grabLunch( search : ()->() ){
@@ -477,7 +493,9 @@ grabLunch(search: {
     print("Phillip is really hungry")
 })
 
+//********************************************************************************************************************
 // Trailing Closure
+//********************************************************************************************************************
 
 /* In trailing closure:
     If a function accepts a closure as its last parameter
@@ -496,15 +514,11 @@ func grabDinner(message: String , search : () -> ()){
     search()
 }
 
-// Calling the closure
-
+// Calling the trailing closure (because the last parameter is a closure) with the code (closure) inside curly braces
 grabDinner(message: "I skipped lunch") {
     print("Let's eat chicken parmi")
 }
 
-
-// defining an empty closure
-var myClosure : () -> () = {}
 
 var computeDamage: (Int) -> Int = { argument in
     return argument * 4
