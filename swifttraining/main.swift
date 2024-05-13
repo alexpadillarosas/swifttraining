@@ -439,6 +439,7 @@ simpleClosure()
 //  Closure with 1 parameter
 //  the parameter called "myName" is specified, and we will refer to this String parameter using this name in the closure
 //********************************************************************************************************************
+print("***************** Closure with 1 parameter returning nothing *****************")
 let greetUserClosure: (String) -> Void = {  (myName)  in
     print("Hello \(myName)")
 }
@@ -455,6 +456,7 @@ greetUser("Curly lemon peel")
 //********************************************************************************************************************
 //  Closure with parameter returning a value
 //********************************************************************************************************************
+print("***************** Closure with 1 parameter returning a value *****************")
 let calculateSquareAreaClosure: (Int) -> Int = { (side) in
     return  side*side
 }
@@ -465,6 +467,7 @@ print("square area \(result)")
 //********************************************************************************************************************
 //  Closure with multiple parameters returning a value
 //********************************************************************************************************************
+print("***************** Closure with 2 parameters returning a value *****************")
 let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width ) in
     return length * width
 }
@@ -476,7 +479,7 @@ print("rectangle area: \(recArea)")
 //  Closures as Function Parameter
 //********************************************************************************************************************
 //  In Swift we can create a function that accepts a closure as its parameter
-
+print("***************** Closure with a closure parameter *****************")
 func grabLunch( search : ()->() ){
     print("Let's go out for lunch")
     //closure call
@@ -491,6 +494,7 @@ func grabLunch( search : ()->() ){
 //  calling the closure
 grabLunch(search: {
     print("Phillip is really hungry")
+    print("Carl is also hungry")
 })
 
 //********************************************************************************************************************
@@ -502,13 +506,13 @@ grabLunch(search: {
     When a function takes a trailing closure, you can omit the parenthesis when calling the function. (we can call the function by passing closure as a function body without mentioning the name of the parameter.)
  For instance the previous function has a trailing closure, therefore we could call it like this:
 */
-
+print("***************** Trailing Closure *****************")
 grabLunch {
     print("Phillip is really hungry after working with trailing closures")
 }
 
 // Now let's see trailing closures with more than 1 parameters, let's define this function:
-
+print("***************** Function with a parameter and a Trailing Closure *****************")
 func grabDinner(message: String , search : () -> ()){
     print(message)
     search()
@@ -525,6 +529,30 @@ var computeDamage: (Int) -> Int = { argument in
 }
 
 print(computeDamage(25))
+
+
+//********************************************************************************************************************
+// Function with parameter, Trailing Closure, returning a value
+//********************************************************************************************************************
+print("***************** Function with parameter, Trailing Closure, returning a value *****************")
+
+func findAlphabetLetters(number total : Int, completion : @escaping () -> Void ) -> [Character] {
+    var selectedCharacters : [Character] = []
+    let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
+    var selectedChar : Character
+    for _ in 1...total {
+        selectedChar = letters.randomElement()!
+        selectedCharacters.append(selectedChar)
+    }
+    completion()
+    return selectedCharacters
+}
+
+var someChars : [Character] = []
+someChars = findAlphabetLetters(number: 9){
+    print("The selected characters are: ")
+}
+print(someChars)
 
 //********************************************************************************************************************
 //  Classes
