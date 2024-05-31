@@ -105,12 +105,111 @@ print(currentGoldInteger)
 var currentGoldString = String(currentGoldDouble)
 print(currentGoldString)
 
+
+
+//********************************************************************************************************************
+//  Arrays
+//********************************************************************************************************************
+print("**************************** Arrays ******************************")
+//creating arrays
+var test : [String] = [] //empty initialised array
+var levelDifficulty : [String] = ["Easy", "Moderate", "Veteran", "Nightmare"]
+var anotherSyntax : Array<String> = Array<String>()
+
+//Count and isEmpty
+print(levelDifficulty.count)
+print(levelDifficulty.isEmpty)
+
+//Accessing array values
+print(levelDifficulty[1])
+levelDifficulty[3] = "Utter Ridiculousness"
+print(levelDifficulty)
+
+print(levelDifficulty.contains("Moderate"))
+print(levelDifficulty.sorted())
+
+
+//********************************************************************************************************************
+//  Dictionaries
+//********************************************************************************************************************
+print("**************************** Dictionaries ******************************")
+var stones : [String : Double] = [ "Opal":1000.0 ,
+                                   "Topaz":553.33 ,
+                                   "Sapphire":332.32 ]
+
+//accessing and modifying values
+var opalPrice = stones["Opal"]
+print(opalPrice)
+//modifying a value in a dictionary
+stones["Opal"] = 2000.0
+print(stones["Opal"])
+
+//declare an empty dictionary
+var emojiDictionary = [Int  : String]()
+
+//alternative declaration
+var emoji: Dictionary<Int, String>
+
+//********************************************************************************************************************
+//  Conditionals
+//********************************************************************************************************************
+print("**************************** Conditionals ******************************")
+var score = 34
+var maxScore = 122
+
+ // <, >, <=, =>, !=, ==
+
+if score < 0 || score > 1000 {
+    print("not possible scenario")
+}else if score > maxScore {
+    print("I've achieved a new MaxScore")
+}else if score > 50 {
+    print("Average Score, keep pushing!")
+}else{
+    print("try again!")
+}
+
+// conditionals using logical operators
+if score > 100 && score < 122 {
+    print("You are getting close to break the record")
+}
+
+//********************************************************************************************************************
+//  Loops
+//********************************************************************************************************************
+print("**************************** Loops ******************************")
+
+let playerGreeting = "Hello fellow hunter"
+let armorTypes = ["Heavy Plate", "Hunters Gear", "Mage Robes"]  //Array
+let weapons = ["Longsword": 150, "Dagger":25 , "Mace":75]       //Dictionary
+
+//Looping through all characters inside of a ?string
+for myCharacter in playerGreeting {
+    print(myCharacter)
+}
+//Looping arrays
+for armor in armorTypes {
+    print(armor)
+}
+
+//Looping a Dictionary
+for ( weapon, cost ) in  weapons {
+    print("\(weapon) : \(cost)")
+}
+
+//While
+var playerHealth = 5
+
+while playerHealth > 0 {
+    print(playerHealth)
+    playerHealth = playerHealth - 1
+}
+
 //********************************************************************************************************************
 //  Optionals
 //********************************************************************************************************************
 print("**************************** Optionals ******************************")
-// If we declare a variable and try to print it (the next 2 instructions), Swift will stop us and tell us : Varible 'itemGathered'
-// used before being initialized
+// If we declare a variable and try to print it (the next 2 instructions), Swift will stop us and tell us : Varible 'itemGathered' used before being initialized
 // var itemGathered : String
 // print(itemGathered)
 // To avoid this issue, we need declare the variable as Optional by adding the symbol ? after the datatype, and Swift
@@ -213,104 +312,6 @@ var colorNameToUse = userDefinedColorName ?? defaultColorName
 // You don't need to create a separate variable to use nil coalescing
 
 
-//********************************************************************************************************************
-//  Arrays
-//********************************************************************************************************************
-print("**************************** Arrays ******************************")
-//creating arrays
-var test : [String] = [] //empty initialised array
-var levelDifficulty : [String] = ["Easy", "Moderate", "Veteran", "Nightmare"]
-var anotherSyntax : Array<String> = Array<String>()
-
-//Count and isEmpty
-print(levelDifficulty.count)
-print(levelDifficulty.isEmpty)
-
-//Accessing array values
-print(levelDifficulty[1])
-levelDifficulty[3] = "Utter Ridiculousness"
-print(levelDifficulty)
-
-print(levelDifficulty.contains("Moderate"))
-print(levelDifficulty.sorted())
-
-
-//********************************************************************************************************************
-//  Dictionaries
-//********************************************************************************************************************
-print("**************************** Dictionaries ******************************")
-var stones : [String : Double] = [ "Opal":1000.0 ,
-                                   "Topaz":553.33 ,
-                                   "Sapphire":332.32 ]
-
-//accessing and modifying values
-var opalPrice = stones["Opal"]
-print(opalPrice)
-//modifying a value in a dictionary
-stones["Opal"] = 2000.0
-print(stones["Opal"])
-
-//declare an empty dictionary
-var emojiDictionary = [Int  : String]()
-
-//alternative declaration
-var emoji: Dictionary<Int, String>
-
-//********************************************************************************************************************
-//  Conditionals
-//********************************************************************************************************************
-print("**************************** Conditionals ******************************")
-var score = 34
-var maxScore = 122
-
- // <, >, <=, =>, !=, ==
-
-if score < 0 || score > 1000 {
-    print("not possible scenario")
-}else if score > maxScore {
-    print("I've achieved a new MaxScore")
-}else if score > 50 {
-    print("Average Score, keep pushing!")
-}else{
-    print("try again!")
-}
-
-// conditionals using logical operators
-if score > 100 && score < 122 {
-    print("You are getting close to break the record")
-}
-
-//********************************************************************************************************************
-//  Loops
-//********************************************************************************************************************
-print("**************************** Loops ******************************")
-
-let playerGreeting = "Hello fellow hunter"
-let armorTypes = ["Heavy Plate", "Hunters Gear", "Mage Robes"]  //Array
-let weapons = ["Longsword": 150, "Dagger":25 , "Mace":75]       //Dictionary
-
-//Looping through all characters inside of a ?string
-for myCharacter in playerGreeting {
-    print(myCharacter)
-}
-//Looping arrays
-for armor in armorTypes {
-    print(armor)
-}
-
-//Looping a Dictionary
-for ( weapon, cost ) in  weapons {
-    print("\(weapon) : \(cost)")
-}
-
-//While
-var playerHealth = 5
-
-while playerHealth > 0 {
-    print(playerHealth)
-    playerHealth = playerHealth - 1
-}
-
 
 //********************************************************************************************************************
 //  Functions
@@ -407,6 +408,8 @@ print("**************************** Closures ******************************")
     parameters : Any value passed to closure
     returnType : Specifies the return type of value returned by the closure
     in         : This is optional, it is used to separate parameters/returnType from the closure body
+ 
+    Closures are anonymoys functions, lambdas, and blocks in other programming languages.
  */
 
 //  Closure without parameters
@@ -463,6 +466,13 @@ let calculateSquareAreaClosure: (Int) -> Int = { (side) in
 //  calling the closure
 let result = calculateSquareAreaClosure(5)
 print("square area \(result)")
+
+
+var computeDamage: (Int) -> Int = { argument in
+    return argument * 4
+}
+
+print(computeDamage(25))
 
 //********************************************************************************************************************
 //  Closure with multiple parameters returning a value
@@ -524,23 +534,20 @@ grabDinner(message: "I skipped lunch") {
 }
 
 
-var computeDamage: (Int) -> Int = { argument in
-    return argument * 4
-}
-
-print(computeDamage(25))
-
-
 //********************************************************************************************************************
 // Function with parameter, Trailing Closure, returning a value
 //********************************************************************************************************************
 print("***************** Function with parameter, Trailing Closure, returning a value *****************")
+// This function returns an array of "n" random characters fro the alphabet
+// By default, the closure passed in the function as a parameter is a non-escaping parameter, which means the closure will execute during the execution of the function.
+// Escaping Closure is Asynchronous and Non-Escaping Closure is Synchronous
 
-func findAlphabetLetters(number total : Int, completion : @escaping () -> Void ) -> [Character] {
+
+func findAlphabetLettersNonEscaping(number n : Int, completion : () -> Void ) -> [Character] {
     var selectedCharacters : [Character] = []
     let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY"
     var selectedChar : Character
-    for _ in 1...total {
+    for _ in 1...n {
         selectedChar = letters.randomElement()!
         selectedCharacters.append(selectedChar)
     }
@@ -549,10 +556,32 @@ func findAlphabetLetters(number total : Int, completion : @escaping () -> Void )
 }
 
 var someChars : [Character] = []
-someChars = findAlphabetLetters(number: 9){
+someChars = findAlphabetLettersNonEscaping(number: 9){
     print("The selected characters are: ")
 }
 print(someChars)
+
+
+// Escaping Closures: When a closure is passed as an argument to the function but that closure is called after the function returns, then such type of closure is known as escaping closure.
+print("**************************** Escaping Closure ******************************")
+func exampleEscapingClosure(number n : Int, completion : @escaping (String) -> Void ) {
+    print("Escaping Closure start")
+    let test = "ABCD"
+    completion(test)  // we execute the block of code received as closure, but also we passed a value (test) to the caller
+    print("Escaping Closure end")
+}
+
+
+//calling the escaping closure,
+var myLocalValue = ""
+exampleEscapingClosure(number: 3) { (value) in // here value is the String parameter received by the closure
+    myLocalValue = value // we can do whatever we want with the parameter, for instance: assign it to a local variable
+    print(myLocalValue)
+}
+
+print("After calling the escaping closure")
+
+
 
 //********************************************************************************************************************
 //  Classes

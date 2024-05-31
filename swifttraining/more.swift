@@ -219,3 +219,49 @@ print(planetSmash.rechargeable)
  print(subjects[2][1])
  
 */
+
+
+/*
+ 
+ class EscapingExamples: NSObject {
+
+     var closure: (() -> Void)?
+
+     func storageExample(with completion: (() -> Void)) {
+         //This will produce a compile-time error because `closure` is outside the scope of this
+         //function - it's a class-instance level variable - and so it could be called by any other method at
+         //any time, even after this function has completed. We need to tell `completion` that it may remain in memory, i.e. `escape` the scope of this
+         //function.
+         closure = completion
+         //Run some function that may call `closure` at some point, but not necessary for the error to show up.
+         //runOperation()
+     }
+
+     func asyncExample(with completion: (() -> Void)) {
+         //This will produce a compile-time error because the completion closure may be called at any time
+         //due to the async nature of the call which precedes/encloses it.  We need to tell `completion` that it should
+         //stay in memory, i.e.`escape` the scope of this function.
+         DispatchQueue.global().async {
+             completion()
+         }
+     }
+
+     func asyncExample2(with completion: (() -> Void)) {
+         //The same as the above method - the compiler sees the `@escaping` nature of the
+         //closure required by `runAsyncTask()` and tells us we need to allow our own completion
+         //closure to be @escaping too. `runAsyncTask`'s completion block will be retained in memory until
+         //it is executed, so our completion closure must explicitly do the same.
+         runAsyncTask {
+             completion()
+         }
+     }
+
+     func runAsyncTask(completion: @escaping (() -> Void)) {
+         DispatchQueue.global().async {
+             completion()
+         }
+     }
+
+ }
+ 
+ */
