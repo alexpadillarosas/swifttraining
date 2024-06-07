@@ -32,7 +32,7 @@ var inventoryItems, equipmentSlots, currentGold : Int
 //  Constants
 //********************************************************************************************************************
 print("**************************** Constants ******************************")
-let maxTemperature = 200
+let maxTemperature : Int = 200
 print(maxTemperature)
 
 //********************************************************************************************************************
@@ -133,16 +133,16 @@ print(levelDifficulty.sorted())
 //  Dictionaries
 //********************************************************************************************************************
 print("**************************** Dictionaries ******************************")
-var stones : [String : Double] = [ "Opal":1000.0 ,
+var stonePrices : [String : Double] = [ "Opal":1000.0 ,
                                    "Topaz":553.33 ,
                                    "Sapphire":332.32 ]
 
 //accessing and modifying values
-var opalPrice = stones["Opal"]
+var opalPrice = stonePrices["Opal"]
 print(opalPrice)
 //modifying a value in a dictionary
-stones["Opal"] = 2000.0
-print(stones["Opal"])
+stonePrices["Opal"] = 2000.0
+print(stonePrices["Opal"])
 
 //declare an empty dictionary
 var emojiDictionary = [Int  : String]()
@@ -190,7 +190,7 @@ for myCharacter in playerGreeting {
 //Looping arrays
 for armor in armorTypes {
     print(armor)
-}
+} 
 
 //Looping a Dictionary
 for ( weapon, cost ) in  weapons {
@@ -204,6 +204,73 @@ while playerHealth > 0 {
     print(playerHealth)
     playerHealth = playerHealth - 1
 }
+
+
+//********************************************************************************************************************
+//  Functions
+//********************************************************************************************************************
+
+print("**************************** Functions ******************************")
+// Function Without Parameters
+func showMeTheMoney1(){
+    print("Show me the money 1")
+}
+showMeTheMoney1()
+
+// Function Without Parameters returning a value
+func showMeTheMoney2() -> String {
+    print("Show me the money 2")
+    return "How much do you want? "
+}
+var result2 = showMeTheMoney2()
+print("result2 : \(result2)")
+
+// Function With Parameters returning a value
+func showMeTheMoney2(name : String) -> String {
+    print("Show me the money 3")
+    return "How much money do you want \(name)"
+}
+var result3 = showMeTheMoney2(name: "John")
+print("result3 : \(result3)")
+
+//Functions with multiple return values
+func createUser(firstName : String, lastName: String) -> (fullName : String, active: Bool){
+    let temp = firstName + " " + lastName
+    return ( temp, false)
+}
+var details = createUser(firstName: "Shiori", lastName: "Takei")
+print(details)
+
+print("**************************** External & Internal Parameter names in Swift ******************************")
+/*
+Swift  functions can use external parameter names to give parameters more  meaningful names when the function is called. The external parameter  name is used when calling the function, while the internal parameter  name is used within the function body.
+To  use external parameter names, you can write the external parameter name  before the internal parameter name in the function definition,  separated by a space.
+For example, the following function calculates the area of a rectangle:
+*/
+func calculateArea(of width: Int, and height: Int) -> Int {
+  return width * height
+}
+/*
+ Here, of and and are the external parameter names, and width and height are the internal parameter names. To call this function, you would use the external parameter names:
+ */
+let area = calculateArea(of: 5, and: 10) // 50
+/*
+ Alternatively, you can use _ as the external parameter name to indicate that the parameter should not be used when calling the function:
+ */
+func calculateArea(_ width: Int, _ height: Int) -> Int {
+    return width * height
+}
+//In this example, you can call the function like this:
+
+let area2 = calculateArea(5, 10) // 50
+
+/*
+Using  external parameter names can make your code more readable and  organized, allowing you to more clearly express the intent of the  function.
+ */
+
+
+
+
 
 //********************************************************************************************************************
 //  Optionals
@@ -312,68 +379,6 @@ var colorNameToUse = userDefinedColorName ?? defaultColorName
 // You don't need to create a separate variable to use nil coalescing
 
 
-
-//********************************************************************************************************************
-//  Functions
-//********************************************************************************************************************
-
-print("**************************** Functions ******************************")
-// Function Without Parameters
-func showMeTheMoney1(){
-    print("Show me the money 1")
-}
-showMeTheMoney1()
-
-// Function Without Parameters returning a value
-func showMeTheMoney2() -> String {
-    print("Show me the money 2")
-    return "How much do you want? "
-}
-var result2 = showMeTheMoney2()
-print("result2 : \(result2)")
-
-// Function With Parameters returning a value
-func showMeTheMoney2(name : String) -> String {
-    print("Show me the money 3")
-    return "How much money do you want \(name)"
-}
-var result3 = showMeTheMoney2(name: "John")
-print("result3 : \(result3)")
-
-//Functions with multiple return values
-func createUser(firstName : String, lastName: String) -> (fullName : String, active: Bool){
-    let temp = firstName + " " + lastName
-    return ( temp, false)
-}
-var details = createUser(firstName: "Shiori", lastName: "Takei")
-print(details)
-
-print("**************************** External & Internal Parameter names in Swift ******************************")
-/*
-Swift  functions can use external parameter names to give parameters more  meaningful names when the function is called. The external parameter  name is used when calling the function, while the internal parameter  name is used within the function body.
-To  use external parameter names, you can write the external parameter name  before the internal parameter name in the function definition,  separated by a space.
-For example, the following function calculates the area of a rectangle:
-*/
-func calculateArea(of width: Int, and height: Int) -> Int {
-  return width * height
-}
-/*
- Here, of and and are the external parameter names, and width and height are the internal parameter names. To call this function, you would use the external parameter names:
- */
-let area = calculateArea(of: 5, and: 10) // 50
-/*
- Alternatively, you can use _ as the external parameter name to indicate that the parameter should not be used when calling the function:
- */
-func calculateArea(_ width: Int, _ height: Int) -> Int {
-    return width * height
-}
-//In this example, you can call the function like this:
-
-let area2 = calculateArea(5, 10) // 50
-
-/*
-Using  external parameter names can make your code more readable and  organized, allowing you to more clearly express the intent of the  function.
- */
 
 //********************************************************************************************************************
 //  Enumerators, used to create datatypes with a small range of elements
