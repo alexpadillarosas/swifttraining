@@ -95,7 +95,7 @@ print(phrase.split(separator: " "))
 //********************************************************************************************************************
 //  Type Conversions
 //********************************************************************************************************************
-print("**************************** Type Conversions ******************************")
+print("**************************** Type Conversions (Differnt than type casting) ******************************")
 var currentGoldDouble = 5.654
 
 var currentGoldInteger : Int = Int(currentGoldDouble)
@@ -597,39 +597,34 @@ print("After calling the escaping closure")
 //********************************************************************************************************************
 //  Classes
 //********************************************************************************************************************
-
 print("**************************** Classes ******************************")
-class Jedi {
-    var name : String
-    var rank : String  //Apprentice, Knight, Master
-    let maxHealth : Int
+class Car {
+    var brand : String
+    var model : String
+    var year  : Int
+    var isNew : Bool
+    var km    : Int64
     
-    // designated initializer
-    init(name: String, rank: String, maxHealth: Int) {
-        self.name = name
-        self.rank = rank
-        self.maxHealth = maxHealth
+    init(brand: String, model: String, year: Int, isNew : Bool, km: Int64) {
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.isNew = isNew
+        self.km = km
     }
     
-    // convenience  initializers
-    convenience init(name : String) {
-        self.init(name: name, rank : "Apprentice", maxHealth : 100)
+    convenience init(brand: String, model: String, year: Int) {
+        self.init(brand: brand, model: model, year: year, isNew: true, km: 0)
     }
     
     func printValues(){
-        print("Jedi: \(self.name), rank: \(self.rank), Health: \(maxHealth) ")
+        print("brand: \(brand), model: \(model), year: \(year), isNew: \(isNew), km: \(km)")
     }
 }
-//Using a class:
-var anakin = Jedi(name: "Anankin Skywalker", rank: "Knight", maxHealth: 80)
-anakin.printValues()
-var dooku = Jedi(name: "Count Dooku", rank: "Master", maxHealth: 100)
-dooku.printValues()
-//watch out with assigning objects, objects are references
-var unknown = dooku;
-unknown.name = "Unknown"
-unknown.printValues()
-dooku.printValues()
+var car = Car(brand: "Toyota", model: "Yaris", year: 2025)
+car.printValues()
+
+
 
 //Subclassing
 
@@ -646,6 +641,41 @@ class Force {
         print("strength: \(self.strength), essence: \(self.essence)")
     }
 }
+
+class Jedi : Force {
+    var name : String
+    var rank : String  //Apprentice, Knight, Master
+    var weapon  : String
+    
+    // designated initializer
+    init(name: String, rank: String, strength: Int, weapon: String) {
+        self.name = name
+        self.rank = rank
+        self.weapon = weapon
+        super.init(strength: strength, essence: "LightSide")
+    }
+    
+    // convenience  initializers
+    convenience init(name : String) {
+        self.init(name: name, rank : "Apprentice", strength: 20, weapon: "Lightsaber")
+    }
+    
+    override func printValues(){
+        print("Jedi: \(self.name), rank: \(self.rank), strength: \(strength), essence: \(essence)")
+    }
+}
+//Using a class:
+var anakin = Jedi(name: "Anankin Skywalker", rank: "Knight", strength: 80, weapon: "Lightsaber" )
+anakin.printValues()
+var dooku = Jedi(name: "Count Dooku", rank: "Master", strength: 100, weapon: "Lightsaber")
+dooku.printValues()
+//watch out with assigning objects, objects are references
+var unknown = dooku;
+unknown.name = "Unknown"
+unknown.printValues()
+dooku.printValues()
+
+
 
 class Sith : Force {
     
@@ -671,6 +701,11 @@ class Sith : Force {
 var darthSidious = Sith(name: "Sheev Palpatine", rank: "Master", lightning: true, strength: 100, weapon: "Lightsaber")
 darthSidious.printValues()
 
+//********************************************************************************************************************
+//  Extensions
+//********************************************************************************************************************
+
+print("**************************** Extensions ******************************")
 
 // Extending String
 extension String {
@@ -710,3 +745,143 @@ if testnil.isBlank {
 
 
 
+//********************************************************************************************************************
+//  Type Casting Syntax
+//********************************************************************************************************************
+
+print("**************************** Type Casting ******************************")
+/*
+ In swift type casting is implemented with the "is" and "as" operators
+    is  for Type Checking
+    as? for Optional Downcasting
+    as! for force Downcasting
+    as for Upcasting
+ */
+
+// Defining a Class Hierarchy for Type Casting
+
+class TVShow{
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Movie: TVShow{
+    var director: String
+    init(name: String, director: String) {
+        self.director = director
+        super.init(name: name)
+    }
+}
+
+class TalkShow: TVShow{
+    var host: String
+    init(name: String, host: String) {
+        self.host = host
+        super.init(name: name)
+    }
+}
+
+let theBucketList = Movie(name: "The Bucket List", director: "Rob Reiner")
+let interstellar = Movie(name: "Interstellar", director: "Christopher Nolan")
+let theTonightShow = TalkShow(name: "The Tonight Show Starring Jimmy Fallon", host: "Jimmy Fallon")
+
+let tvSchedule = [theBucketList, interstellar, theTonightShow]
+// tvSchedule must have only one type. This is TVShow because it is a common base class.
+
+//Type Checking, "is", checks which class an instance belongs to. The expression returns a value of type Bool.
+//For example, we want to find out how many movies and how many talk shows are in today’s schedule with type checking.
+
+// Checking Type
+var movieCount = 0
+var talkShowCount = 0
+
+for item in tvSchedule{
+    if item is Movie{               // Checking Type with 'is'
+        movieCount += 1
+    }else if item is TalkShow{
+        talkShowCount += 1
+    }
+}
+print("Today, there is/are \(movieCount) Movie(s), \(talkShowCount) Talk Show(s)")
+// Today, there is/are 2 Movie(s), 1 Talk Show(s)
+
+/*
+ 
+ Optional Downcasting
+ Optional Downcasting, as?, returns an optional value of the type that you are trying to downcast to.
+
+ Use the conditional form of the type cast operator when you are not sure if the downcast will succeed.
+ */
+
+var myMovie = tvSchedule[0] as? Movie
+print(myMovie?.name)
+// Optional("The Bucket List")
+
+var myTalkShow = tvSchedule[0] as? TalkShow
+print(myTalkShow?.name)
+// Nothing Happens. Because 0-index item is not a TalkShow object
+
+/*
+ Actually “as?” Asks a question: “Is this object derived from this class?”.
+
+ If Yes, it returns an Optional object. Properties are also optional. Unwrapping is required to use the values.
+ If No, nothing happens and this part of the code is skipped.
+ */
+ 
+/*
+ Force Downcasting
+ The forced form, as!, attempts the downcast and force-unwraps the result as a single compound action.
+
+ Use the forced form of the type cast operator (as!) only when you are sure that the downcast will always succeed.
+ */
+
+var myMovieForce = tvSchedule[0] as! Movie
+print(myMovieForce.name)
+// The Bucket List
+
+//Uncomment when teaching
+/*
+var myTalkShowForce = tvSchedule[0] as! TalkShow
+print(myTalkShowForce.name)
+// CRASHED!
+*/
+/*
+ Force Downcasting means “I know what I’m doing. I’m sure of the type of this object.”
+
+ If True, it returns an unwrapped object.
+ If False.. The code will be crashed.
+ */
+
+/*
+ Upcasting
+ With Upcasting, a class is requested to behave like its base class. Since the derived class will already have base class properties, no error will occur.
+ */
+
+var myTVShow = interstellar as TVShow
+print(myTVShow.name)
+// Interstellar
+
+/*
+ Since the Movie class is already derived from the TVShow class, we may want it to behave as TVShow, and we may not prefer some override functions.
+
+ Type Casting behaves completely hierarchically. So, it is necessary to know the Swift class hierarchy. (Any ⊃ AnyObject ⊃ NSObject)
+ */
+
+/*
+Summary
+To sum up, Optional Downcasting and Force Downcasting are more commonly used in Type Casting.
+*/
+
+let myNameAny: Any = "Harvey"
+let nameX = myNameAny as? String
+print(nameX)
+// Optional("Harvey")
+print(type(of: nameX))
+// Optional<String>
+
+let myNameY = myNameAny as! String
+print(myNameY)
+// Harvey
+print(type(of: myNameY))
