@@ -3,7 +3,6 @@
 //  swifttraining
 //
 //  Created by alex on 19/9/2022.
-//
 
 import Foundation
 
@@ -190,7 +189,7 @@ for myCharacter in playerGreeting {
 //Looping arrays
 for armor in armorTypes {
     print(armor)
-} 
+}
 
 //Looping a Dictionary
 for ( weapon, cost ) in  weapons {
@@ -234,14 +233,16 @@ var result3 = showMeTheMoney2(name: "John")
 print("result3 : \(result3)")
 
 //Functions with multiple return values
-func createUser(firstName : String, lastName: String) -> (fullName : String, active: Bool){
-    let temp = firstName + " " + lastName
-    return ( temp, false)
+//function with multiple return values
+func createUser(firstname : String, lastname: String) -> (fullname : String, password : String){
+    let temp = firstname + " " + lastname
+    let pass = UUID().uuidString
+    return ( temp, pass)
 }
-var details = createUser(firstName: "Shiori", lastName: "Takei")
+var details = createUser(firstname: "John", lastname: "Doe")
 print(details)
 
-print("**************************** External & Internal Parameter names in Swift ******************************")
+print("**************************** External & Internal Parameter names in Swift functions ******************************")
 /*
 Swift  functions can use external parameter names to give parameters more  meaningful names when the function is called. The external parameter  name is used when calling the function, while the internal parameter  name is used within the function body.
 To  use external parameter names, you can write the external parameter name  before the internal parameter name in the function definition,  separated by a space.
@@ -277,26 +278,17 @@ Using  external parameter names can make your code more readable and  organized,
 //********************************************************************************************************************
 print("**************************** Optionals ******************************")
 // If we declare a variable and try to print it (the next 2 instructions), Swift will stop us and tell us : Varible 'itemGathered' used before being initialized
-// var itemGathered : String
-// print(itemGathered)
+var itemGathered : String
+//Uncomment this line to show how the compiler prevents a crash, marking this line as error.
+//print(itemGathered.count)
+
+
+// =====>  Optionals to the rescue
 // To avoid this issue, we need declare the variable as Optional by adding the symbol ? after the datatype, and Swift
 // will let us proceed but the variable will have nil as value
 
-var itemGathered : String?
-print(itemGathered)
-
-// Now if we assign a value to an Optional Variable, we will see how the variable gets wrapped as Optional
-var itemDropped : String? = "Axe"
-print(itemDropped)
-
-//First version that will break your code
-var myName2 : String = "" //it's hard to fool the compiler here but in an app with a UI myName2 can be nil
-
-print(myName2.count)
-
-
-//Optionals to the rescue
 var myName :  String? = "Dr Pepper"
+print(myName)
 //print(myName?.count)
 
 //======================================
@@ -351,7 +343,7 @@ print("**************************** Unwrapping Optionals ***********************
 
 var text: String! = nil
 
-let totalLetters = text?.count //test what happens if we remove the optional -> the app crashes
+let totalLetters = text?.count //test what happens if we remove the null check operator : ? -> the app crashes
 
 print(totalLetters)
 
@@ -419,13 +411,21 @@ print("**************************** Closures ******************************")
 
 //  Closure without parameters
 
-var greet = {
+var greet = { () -> Void in
     print("Hello World")
 }
 //  Here we have defined a closure and assigned to a variable called greet, notice : the closure does not have any parameters and return type.
 //  To execute this closure, we need to call it. Here is how we can call the closure
 //  notice that the print statement inside the closure is executed
 greet()
+// since there are not parameters then we could remove the parameter's parenthesis
+// also since we return nothing we could omit the return statement  -> Void
+// plus the reserve word in is optional
+// so we could redefine the previous function as:
+
+greet = {
+    print("hello World")
+}
 
 
 //********************************************************************************************************************
@@ -448,18 +448,23 @@ simpleClosure()
 //  the parameter called "myName" is specified, and we will refer to this String parameter using this name in the closure
 //********************************************************************************************************************
 print("***************** Closure with 1 parameter returning nothing *****************")
+//defining a closure
 let greetUserClosure: (String) -> Void = {  (myName)  in
     print("Hello \(myName)")
 }
 //calling the closure:
 greetUserClosure("Michael")
 
+//assigning the closure to a constant, here we assign the BODY of the closure, since it's the body we don't know
+//anything about the parameters, or the return datatype, so we have to specify it inside of the body
 let greetUser = {  (anotherName:  String) in
     print("Hello \(anotherName)")
 }
 //  calling the closure
 greetUser("Curly lemon peel")
 //  notice: Unlike functions, we call the closure without mentioning the parameter name.
+
+
 
 //********************************************************************************************************************
 //  Closure with parameter returning a value
@@ -473,17 +478,17 @@ let result = calculateSquareAreaClosure(5)
 print("square area \(result)")
 
 
-var computeDamage: (Int) -> Int = { argument in
-    return argument * 4
-}
-
-print(computeDamage(25))
+//var computeDamage: (Int) -> Int = { argument in
+//    return argument * 4
+//}
+//
+//print(computeDamage(25))
 
 //********************************************************************************************************************
 //  Closure with multiple parameters returning a value
 //********************************************************************************************************************
 print("***************** Closure with 2 parameters returning a value *****************")
-let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width ) in
+let calculateRectangleAreaClosure: (Double, Double) -> Double = { (length, width)  in // the parenthesis for the parameters names are optional, you can remove it
     return length * width
 }
 //calling the closure
@@ -508,9 +513,10 @@ func grabLunch( search : ()->() ){
 
 //  calling the closure
 grabLunch(search: {
-    print("Phillip is really hungry")
-    print("Carl is also hungry")
-})
+                    print("Phillip is really hungry")
+                    print("Carl is also hungry")
+                  }
+         )
 
 //********************************************************************************************************************
 // Trailing Closure
@@ -543,7 +549,7 @@ grabDinner(message: "I skipped lunch") {
 // Function with parameter, Trailing Closure, returning a value
 //********************************************************************************************************************
 print("***************** Function with parameter, Trailing Closure, returning a value *****************")
-// This function returns an array of "n" random characters fro the alphabet
+// This function returns an array of "n" random characters from the alphabet
 // By default, the closure passed in the function as a parameter is a non-escaping parameter, which means the closure will execute during the execution of the function.
 // Escaping Closure is Asynchronous and Non-Escaping Closure is Synchronous
 
@@ -581,7 +587,7 @@ func exampleEscapingClosure(number n : Int, completion : @escaping (String) -> V
 var myLocalValue = ""
 exampleEscapingClosure(number: 3) { (value) in // here value is the String parameter received by the closure
     myLocalValue = value // we can do whatever we want with the parameter, for instance: assign it to a local variable
-    print(myLocalValue)
+    print(myLocalValue + myLocalValue)
 }
 
 print("After calling the escaping closure")
@@ -700,6 +706,7 @@ if testnil.isBlank {
 }else{
     print("it has a value")
 }
+
 
 
 
