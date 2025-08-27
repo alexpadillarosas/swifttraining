@@ -113,7 +113,7 @@ print("**************************** Arrays ******************************")
 //creating arrays
 var test : [String] = [] //empty initialised array
 var levelDifficulty : [String] = ["Easy", "Moderate", "Veteran", "Nightmare"]
-var anotherSyntax : Array<String> = Array<String>()
+//var anotherSyntax : Array<String> = Array<String>()
 
 //Count and isEmpty
 print(levelDifficulty.count)
@@ -209,6 +209,15 @@ while playerHealth > 0 {
 //  Functions
 //********************************************************************************************************************
 
+//All parameters passed into a Swift function are constants, so you can’t change them. If you want, you can pass in one or more parameters as inout, which means they can be changed inside your function, and those changes reflect in the original value outside the function.
+func doubleInPlace(number: inout Int) {
+    number *= 2
+}
+
+var myNum = 10
+doubleInPlace(number: &myNum)
+print("myNum after calling the function \(myNum)")
+
 print("**************************** Functions ******************************")
 // Function Without Parameters
 func showMeTheMoney1(){
@@ -269,8 +278,37 @@ let area2 = calculateArea(5, 10) // 50
 Using  external parameter names can make your code more readable and  organized, allowing you to more clearly express the intent of the  function.
  */
 
+func sayHello(to name: String) {
+    print("Hello, \(name)!")
+}
 
+sayHello(to: "Taylor")
 
+//Omitting parameter labels: use underscore
+func greet(_ person: String) {
+    print("Hello, \(person)!")
+}
+greet("Taylor")
+
+//Default Parameters
+func greet(_ person: String, nicely: Bool = true) {
+    if nicely == true {
+        print("Hello, \(person)!")
+    } else {
+        print("Oh no, it's \(person) again...")
+    }
+}
+
+greet("Taylor")
+greet("Taylor", nicely: false)
+
+//Varidic Functions
+func square(numbers: Int...) {
+    for number in numbers {
+        print("\(number) squared is \(number * number)")
+    }
+}
+square(numbers: 1, 2, 3, 4, 5)
 
 
 //********************************************************************************************************************
@@ -303,16 +341,20 @@ if let unwrapped = myName {
     //myName does not have a value
     print("Missing name")
 }
+// NOTICE: the unwrapped variable cannot be used outside the if statement, uncomment the following line to check
+//print(unwrapped) <-- Cannot find unwrapped in Scope
+
 //So if you want to be sure that a variable does contain a value you better use optional  : ? (question mark)
 
 //======================================
 //Unwrapping an optional with guard:
 // guard let is designed to exit the current function, loop or condition if the check fails, let's use the same example
+// `guard` is designed for early exit. It ensures a condition is true, otherwise it requires exiting the current scope via `return`
 func checkValue() -> Void {
     guard let unwrapped = myName else {
         return
     }
-    print(unwrapped)
+    print(unwrapped)  // <-- NOTICE I can use the unwrapped variable outside of the guard, this does not happen when unwrapping with if
 }
 //a couple of things happens in here, guard let us focus on the happy path, the behaviour of logic when everything has
 //gone to plan. it requires that we exit the current scope (loop, condition, function) when the guard fails
@@ -409,6 +451,16 @@ print("**************************** Closures ******************************")
     Closures are anonymoys functions, lambdas, and blocks in other programming languages.
  */
 
+//Here’s a function that accepts a string and an integer:
+func pay(user: String, amount: Int) {
+    // code
+}
+//And here’s exactly the same thing written as a closure:
+let payment = { (user: String, amount: Int) in
+    // code
+}
+
+
 //  Closure without parameters
 
 var greet = { () -> Void in
@@ -420,11 +472,11 @@ var greet = { () -> Void in
 greet()
 // since there are not parameters then we could remove the parameter's parenthesis
 // also since we return nothing we could omit the return statement  -> Void
-// plus the reserve word in is optional
+// after this, the reserve word in is not needed as it is usually used to separate the func declaration with the body function
 // so we could redefine the previous function as:
 
 greet = {
-    print("hello World")
+    print("Hello World")
 }
 
 
@@ -535,14 +587,35 @@ grabLunch {
 // Now let's see trailing closures with more than 1 parameters, let's define this function:
 print("***************** Function with a parameter and a Trailing Closure *****************")
 func grabDinner(message: String , search : () -> ()){
-    print(message)
+    print("First Line in grabDinner function")
+    print("This is the message passed as first parameter: \(message)")
+    print("=======Now the Search closure (Block of code) will be executed======")
     search()
+    print("=======The Search closure (Block of code) has finished=======")
+    print("Last Line in grabDinner function")
 }
 
 // Calling the trailing closure (because the last parameter is a closure) with the code (closure) inside curly braces
 grabDinner(message: "I skipped lunch") {
-    print("Let's eat chicken parmi")
+    //Start of the Block of code we pass to grabDinner
+    print("This is the first line that search closure will contain")
+    print("This is the second line: Let's eat chicken parmi")
+    print("And this is the third line: Let's crack open a beer")
+    //End of the Block of code we passed to grabDinner
 }
+
+//Another way to pass it
+let searchBlockOfCode = {
+    print("This is the first line that search closure will contain")
+    print("This is the second line: Let's eat chicken parmi")
+    print("And this is the third line: Let's crack open a beer")
+}
+print()
+print("======= Calling the same but passing a the block of code as constant")
+grabDinner(message: "I skipped dinner") {
+    searchBlockOfCode()
+}
+
 
 
 //********************************************************************************************************************
